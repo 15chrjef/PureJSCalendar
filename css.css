@@ -2,39 +2,70 @@ tr{
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	background-color: #F5F5F5;
-	height: 30px;
 }
-table {
-	display: flex;
-	justify-content: center;
-	width: 100%;
-}
-
+tbl {
+	margin-top: 30px;	
+}	
 .events {
-		padding: 0px 10px 0 10px;
-		width: 600px;
+	margin-left: 10px;
+	height: 720px;
+	width: 600px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: lightgray;	
 }
 .daytime {
+	margin-top: 3px;
 	display: flex;
 	background-color: white;
 	justify-content: flex-start;
 	font-size: 10px;
-	align-items: flex-end;
+	align-items: flex-start;
 }
-
 .time {
 	background-color: white;
 	margin-right: -5px;
+	height: 58px;
 	width: 45px;
-	color: grey;
+	color: black;
 	font-size: 16px;
+	font-weight: bold;
 	display: flex;
-	align-items: flex-end;
+	flex-direction: column;
+	align-items: flex-start;
 }
-
-div {
+#div1 {
 	display: flex;
 	align-items: center;
+}
+.event {
+	margin-left: 10px;
+	width: 68%;
+	background-color: white;
+	border-left: 5px solid green;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+}
+.eventText1 {
+  display: block;
+	font-size: 20px;
+	color: gray;
+	width: 100%;
+}
+.eventText2 {
+	display: relative;
+	width: 100%;
+	font-size: 12px;
+}
+body {
+	align-items: center;
 	justify-content: center;
+	display: flex;
+	flex-direction: column;
+}
+
+p {
+	font-size: 12px;
+	color: gray;
 }
