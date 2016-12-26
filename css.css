@@ -41,7 +41,7 @@ tbl {
 .event {
 	margin-left: 10px;
 	margin-right: 10px;
-	width: 54%;
+	width: 25%;
 	background-color: white;
 	border-left: 5px solid green;
 	padding: 5px;
@@ -69,4 +69,8 @@ body {
 p {
 	font-size: 12px;
 	color: gray;
+}
+
+.eventRow {
+	position: absolute;
 }
