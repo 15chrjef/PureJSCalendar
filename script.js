@@ -1,5 +1,6 @@
 	
 document.body.onload = renderRows;
+//function to create table and time stamps from 9AM to 9PM
 function renderRows() {
 	var table = document.createElement("tbl")
 	for(var i = 0 ; i < 13; i++) {
@@ -44,9 +45,10 @@ function renderRows() {
 	div.appendChild(eventDiv)
 }
 
+//function to add events
 function layOutDay(myEvents) {
-	var myNode = document.getElementsByClassName('events')
-	while (myNode.firstChild) {
+	var myNode = document.getElementsByClassName('events')[0]
+	while (myNode.childNodes.length > 0) {
   	myNode.removeChild(myNode.firstChild);
 	}	
 	myEvents.forEach(function(myEvent) {
@@ -87,12 +89,9 @@ function layOutDay(myEvents) {
 				var eventTable = document.getElementsByClassName('events')[0];
 				eventTable.appendChild(eventRow)
 			} else {
-				console.log('we have a div!!!!!!')
 				if(eventRow.start > myEvent.start) {
-					console.log('resettng div!!!!!!')
 					eventRow.start = myEvent.start
 				} else if (eventRow.end < myEvent.end) {
-					console.log('resettng div!!!!!!')
 					eventRow.end = myEvent.end
 				}
 				var t = Number(eventRow.childNodes[0].style.top.substr(0,3))
