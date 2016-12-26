@@ -52,6 +52,7 @@ function layOutDay(myEvents) {
   	myNode.removeChild(myNode.firstChild);
 	}	
 	myEvents.forEach(function(myEvent) {
+		//console log an error if the time entered is not in the range
 		if(myEvent.end <= 720) {
 			var eventRow = eventHasConflicts(myEvent)
 			var event = document.createElement('td')
@@ -60,16 +61,10 @@ function layOutDay(myEvents) {
 			event.end = myEvent.end
 
 			//generate the title for the event
-			var eventTitle = document.createElement('div')
-			var eventTitleText = document.createTextNode('Header')
-			eventTitle.className += 'eventText1'
-			eventTitle.appendChild(eventTitleText)
+			var eventTitle = generateTextNode('Header', 'eventText1')
 			
 			//generate the subheader for the event
-			var eventBody = document.createElement('div')
-			var eventBodyText = document.createTextNode('Subheader')
-			eventBody.className += 'eventText2'
-			eventBody.appendChild(eventBodyText)
+			var eventBody = generateTextNode('Subheader', 'eventText2')
 
 			event.appendChild(eventTitle)
 			event.appendChild(eventBody)
@@ -77,17 +72,17 @@ function layOutDay(myEvents) {
 			event.style.top = myEvent.start + 40 + 'px';
 			event.style.height = myEvent.end - myEvent.start -10 + 'px';
 			event.style.width = 540 + 'px'
-			console.log('eventRow', eventRow)
+			//create a new row in our event table if no conflict is found
 			if(!eventRow) {
-				console.log('we do not have a div')
 				eventRow = document.createElement("tr")
 				eventRow.start = myEvent.start
 				eventRow.end = myEvent.end
-				eventRow.setAttribute('style',`top: ${0}px`)
+				eventRow.setAttribute('style',`height: ${myEvent.end - myEvent.start -10}px`) + 'px'; 
 				eventRow.className = 'eventRow'
 				eventRow.appendChild(event)
 				var eventTable = document.getElementsByClassName('events')[0];
 				eventTable.appendChild(eventRow)
+				// if we have a conflict, add the event to the conflicting row
 			} else {
 				if(eventRow.start > myEvent.start) {
 					eventRow.start = myEvent.start
@@ -95,13 +90,13 @@ function layOutDay(myEvents) {
 					eventRow.end = myEvent.end
 				}
 				var t = Number(eventRow.childNodes[0].style.top.substr(0,3))
-
+				//variable w as referenced in instructions
 				var w = 500/ (eventRow.childNodes.length + 1)
 				eventRow.style.top = t
 				event.setAttribute('style',`width: ${w}px`)
 				event.style.top = myEvent.start + 40 + 'px';
 
-				console.log(event.style)
+				//resetting attributes of the row and the row's children
 				for( var j = 0; j < eventRow.childNodes.length; j++) {
 					var top = eventRow.childNodes[j].style.top
 					eventRow.childNodes[j].setAttribute('style',`width: ${w}px`)
@@ -116,14 +111,23 @@ function layOutDay(myEvents) {
 	})
 }
 
+//function to check if the event we are adding has any potential conflicts
 function eventHasConflicts(myEvent) {
 	var events = document.getElementsByClassName('events')[0].childNodes
 	if(events.length > 0) {
 		for( var i = 0; i < events.length; i++) {
-			 console.log('divvvvvinffffooooo', events[i].start,events[i].end, myEvent.start, myEvent.end )
 			if((!(events[i].start > myEvent.start && events[i].start > myEvent.end) && !(events[i].end < myEvent.start))) {
 				return events[i]
 			}
 		}
 	}
+}
+
+//function to generate the text nodes for an event
+function generateTextNode (text, className){
+		var node = document.createElement('div')
+		var nodeText = document.createTextNode(text)
+		node.className += className
+		node.appendChild(nodeText)
+		return node
 }
